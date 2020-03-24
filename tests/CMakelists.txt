@@ -1,0 +1,21 @@
+find_package(GTest REQUIRED)
+include(GoogleTest)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+file(GLOB_RECURSE TEST_FILES "*.cpp" "*.h")
+add_executable(tests ${TEST_FILES})
+target_compile_features(ntfile PRIVATE cxx_std_11)
+
+# Prevent overriding the parent project's compiler/linker
+# settings on Windows
+include_directories(${CONAN_INCLUDE_DIRS_GTEST})
+
+if (MSVC)
+    target_link_libraries(tests PRIVATE ntfile gtest)
+else()
+    target_link_libraries(tests PRIVATE ntfile gtest pthread)
+endif (MSVC)
+
+gtest_discover_tests(tests)
+
+configure_file(data/test1.txt data/test1.txt COPYONLY)
