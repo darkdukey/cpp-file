@@ -36,3 +36,15 @@ TEST_F(UtilTest, File_Read) {
     EXPECT_EQ(data.size(), 17);
     EXPECT_EQ(data[0], 't');
 }
+
+TEST_F(UtilTest, File_Path) {
+    string path_a = "../tests/";
+    string path_b = "data";
+    string path_c = join(path_a, path_b);
+    EXPECT_EQ(path_c, "../tests/data");
+
+    path_a = "../tests";
+    path_b = "data";
+    path_c = join(path_a, path_b);
+    EXPECT_EQ(path_c, "../tests/data");
+}

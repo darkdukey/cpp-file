@@ -1,4 +1,5 @@
 #include "FileUtil.h"
+
 #include <fstream>
 #include <iostream>
 #include <iterator>
@@ -71,6 +72,17 @@ bool FileUtil::loadFile(const string& filename, vector<unsigned char>& data) {
     data.insert(data.begin(), istream_iterator<unsigned char>(file), istream_iterator<unsigned char>());
 
     return true;
+}
+
+string FileUtil::join(const string& a, const string& b) {
+    string res;
+    if (a.back() != separator()) {
+        res = a + separator() + b;
+    } else {
+        res = a + b;
+    }
+
+    return res;
 }
 
 }  // namespace NT
